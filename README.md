@@ -81,7 +81,7 @@ bool remove_first_negative_element(const std::vector<int>& vec, int& removed_ele
 6. Необходимо реализовать функцию, которая заменяет в строке все вхождения подстроки на новую строку.
 Можно пользоваться функцией `std::string::find`, о которой можно почитать [тут](https://ru.cppreference.com/w/cpp/string/basic_string/find).
 ```cpp
-std::string replace(const std::string& str, const std::string& old, const std::string& new);
+std::string replace(const std::string& str, const std::string& old, const std::string& new_string);
 ```
 Пример:
 ```cpp
