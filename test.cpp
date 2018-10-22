@@ -6,48 +6,48 @@ TEST(Task1, Middle) {
   // базовый сценарий
   std::vector<float> v1 = {11, 2, 36, 47, 5, 53, 56};
   float result = mean(v1);
-  EXPECT_NEAR(result, 30, std::numeric_limits<double>::epsilon());
+  EXPECT_NEAR(result, 30, std::numeric_limits<float>::epsilon());
   // отрицательные коэфиициенты
   std::vector<float> v2 = {-11, -2, -36, -47, -5, -53, -56};
   result = mean(v2);
-  EXPECT_NEAR(result, -30, std::numeric_limits<double>::epsilon());
+  EXPECT_NEAR(result, -30, std::numeric_limits<float>::epsilon());
   // положительные и отрицательные коэфиициенты
   std::vector<float> v3 = {5, -3, -5, 47, -40, 3, 0};
   result = mean(v3);
-  EXPECT_NEAR(result, 1, std::numeric_limits<double>::epsilon());
+  EXPECT_NEAR(result, 1, std::numeric_limits<float>::epsilon());
   // вектор из одного элемента
   std::vector<float> v4 = {456};
   result = mean(v4);
-  EXPECT_NEAR(result, 456, std::numeric_limits<double>::epsilon());
+  EXPECT_NEAR(result, 456, std::numeric_limits<float>::epsilon());
   // пустой вектор
   std::vector<float> v5 = {};
   result = mean(v5);
-  EXPECT_NEAR(result, 0, std::numeric_limits<double>::epsilon());
+  EXPECT_NEAR(result, 0, std::numeric_limits<float>::epsilon());
 }
 
 TEST(Task2, MinimunAndMaximum) {
   std::vector<float> v = {1, 2, 3, 4, 5, 0};
   auto pair = minMax(v);
-  EXPECT_NEAR(pair.first, 0, std::numeric_limits<double>::epsilon());
-  EXPECT_NEAR(pair.second, 5, std::numeric_limits<double>::epsilon());
+  EXPECT_NEAR(pair.first, 0, std::numeric_limits<float>::epsilon());
+  EXPECT_NEAR(pair.second, 5, std::numeric_limits<float>::epsilon());
 
   pair = minMax({-1, -2, -3, -4, -5, 0});
-  EXPECT_NEAR(pair.first, -5, std::numeric_limits<double>::epsilon());
-  EXPECT_NEAR(pair.second, 0, std::numeric_limits<double>::epsilon());
+  EXPECT_NEAR(pair.first, -5, std::numeric_limits<float>::epsilon());
+  EXPECT_NEAR(pair.second, 0, std::numeric_limits<float>::epsilon());
   // массив из одинаковых элементов
   pair = minMax({1, 1, 1, 1, 1, 1});
-  EXPECT_NEAR(pair.first, 1, std::numeric_limits<double>::epsilon());
-  EXPECT_NEAR(pair.second, 1, std::numeric_limits<double>::epsilon());
+  EXPECT_NEAR(pair.first, 1, std::numeric_limits<float>::epsilon());
+  EXPECT_NEAR(pair.second, 1, std::numeric_limits<float>::epsilon());
 
   // массив из одного элемента
   pair = minMax({15});
-  EXPECT_NEAR(pair.first, 15, std::numeric_limits<double>::epsilon());
-  EXPECT_NEAR(pair.second, 15, std::numeric_limits<double>::epsilon());
+  EXPECT_NEAR(pair.first, 15, std::numeric_limits<float>::epsilon());
+  EXPECT_NEAR(pair.second, 15, std::numeric_limits<float>::epsilon());
 
   // пустой массив
   pair = minMax({});
-  EXPECT_NEAR(pair.first, std::numeric_limits<int>::min(), std::numeric_limits<double>::epsilon());
-  EXPECT_NEAR(pair.second, std::numeric_limits<int>::max(), std::numeric_limits<double>::epsilon());
+  EXPECT_NEAR(pair.first, std::numeric_limits<float>::min(), std::numeric_limits<float>::epsilon());
+  EXPECT_NEAR(pair.second, std::numeric_limits<float>::max(), std::numeric_limits<float>::epsilon());
 }
 
 TEST(Task3, Argmax) {
@@ -105,36 +105,36 @@ TEST(Task4, Sort) {
   EXPECT_EQ(v5, res_v5);
 }
 
-TEST(Task5, Remove_first_negative_element) {
+TEST(Task5, RemoveFirstNegativeElement) {
   // базовый сценарий
-  float removed_element = 0;
-  std::vector<float> v1 = {11, -2, 36, -47, 5, 53, 56};
-  std::vector<float> result1 = {11, 36, -47, 5, 53, 56};
-  bool test = remove_first_negative_element(v1);
+  int removed_element = 0;
+  std::vector<int> v1 = {11, -2, 36, -47, 5, 53, 56};
+  std::vector<int> result1 = {11, 36, -47, 5, 53, 56};
+  bool test = remove_first_negative_element(v1, removed_element);
   EXPECT_EQ(result1, v1);
   EXPECT_EQ(test, true);
-  EXPECT_NEAR(removed_element, -2, std::numeric_limits<double>::epsilon());
+  EXPECT_EQ(removed_element, -2);
   // только неотрицательные элементы
-  std::vector<float> v2 = {11, 2, 0, 47, 5, 53, 56};
-  std::vector<float> result2 = {11, 2, 0, 47, 5, 53, 56};
-  test = remove_first_negative_element(v2);
+  std::vector<int> v2 = {11, 2, 0, 47, 5, 53, 56};
+  std::vector<int> result2 = {11, 2, 0, 47, 5, 53, 56};
+  test = remove_first_negative_element(v2, removed_element);
   EXPECT_EQ(result2, v2);
   EXPECT_EQ(test, false);
-  EXPECT_NEAR(removed_element, 0, std::numeric_limits<double>::epsilon());
+  EXPECT_EQ(removed_element, 0);
   // один отрицательный элемент
-  std::vector<float> v3 = {-111};
-  std::vector<float> result3 = {};
-  test = remove_first_negative_element(v3);
-  EXPECT_NEAR(result3, v3, std::numeric_limits<double>::epsilon());
+  std::vector<int> v3 = {-111};
+  std::vector<int> result3 = {};
+  test = remove_first_negative_element(v3, removed_element);
+  EXPECT_EQ(result3, v3);
   EXPECT_EQ(test, true);
-  EXPECT_NEAR(removed_element, -111, std::numeric_limits<double>::epsilon());
+  EXPECT_EQ(removed_element, -111);
   // пустой массив
-  std::vector<float> v4 = {};
-  std::vector<float> result4 = {};
-  test = remove_first_negative_element(v4);
+  std::vector<int> v4 = {};
+  std::vector<int> result4 = {};
+  test = remove_first_negative_element(v4, removed_element);
   EXPECT_EQ(result4, v4);
   EXPECT_EQ(test, false);
-  EXPECT_NEAR(removed_element, 0, std::numeric_limits<double>::epsilon());
+  EXPECT_EQ(removed_element, 0);
 }
 
 TEST(Task6, Replace) {
